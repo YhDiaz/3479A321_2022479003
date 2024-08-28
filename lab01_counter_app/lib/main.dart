@@ -17,6 +17,20 @@ Widget footerButton(
   );
 }
 
+Widget floatingButton(
+  Function? onPressed_,
+  String? tooltip_,
+  Widget? child_
+)
+{
+  return FloatingActionButton
+  (
+    onPressed: () => onPressed_!(),
+    tooltip: tooltip_,
+    child: child_
+  );
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -172,13 +186,13 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
 
-      floatingActionButton: FloatingActionButton //Floating button to reset counter value
-      (
-        onPressed: _resetCounter,
-        tooltip: 'Reiniciar',
-        // tooltip: 'Reset',
-        child: const Icon(Icons.refresh),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: floatingButton(_resetCounter, 'Reiniciar', const Icon(Icons.refresh)) //Floating button to reset counter value
+      // (
+      //   onPressed: _resetCounter,
+      //   tooltip: 'Reiniciar',
+      //   // tooltip: 'Reset',
+      //   child: const Icon(Icons.refresh),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
