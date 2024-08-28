@@ -104,7 +104,10 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       persistentFooterButtons: [
-        
+        ElevatedButton(
+          onPressed: _decrementCounter,
+          child: const Icon(Icons.remove)
+          )
       ],
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
