@@ -17,6 +17,7 @@ Widget footerButton(
   );
 }
 
+//Create a floating button witha a functionality, a tooltip and an icon
 Widget floatingButton(
   Function? onPressed_,
   String? tooltip_,
@@ -134,17 +135,6 @@ class _MyHomePageState extends State<MyHomePage> {
       [
         footerButton(_decrementCounter, const Icon(Icons.remove)), //Footer button to decrement counter value
         footerButton(_incrementCounter, const Icon(Icons.add)), //Footer button to increment counter value
-
-        // ElevatedButton //Footer button to decrement counter value
-        // (
-        //   onPressed: _decrementCounter,
-        //   child: const Icon(Icons.remove)
-        // ),
-        // ElevatedButton //Footer button to increment counter value
-        // (
-        //   onPressed: _incrementCounter,
-        //   child: const Icon(Icons.add)
-        // )
       ],
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
@@ -176,7 +166,6 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             const Text(
               'Has presionado el botón todas estas veces:'
-              // 'You have pushed the button this many times:',
             ),
             Text(
               '$_counter',
@@ -187,12 +176,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
 
       floatingActionButton: floatingButton(_resetCounter, 'Reiniciar', const Icon(Icons.refresh)) //Floating button to reset counter value
-      // (
-      //   onPressed: _resetCounter,
-      //   tooltip: 'Reiniciar',
-      //   // tooltip: 'Reset',
-      //   child: const Icon(Icons.refresh),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
