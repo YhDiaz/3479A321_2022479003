@@ -105,12 +105,12 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       persistentFooterButtons:
       [
-        ElevatedButton //Footer button to decrement
+        ElevatedButton //Footer button to decrement counter value
         (
           onPressed: _decrementCounter,
           child: const Icon(Icons.remove)
         ),
-        ElevatedButton //Footer button to increment
+        ElevatedButton //Footer button to increment counter value
         (
           onPressed: _incrementCounter,
           child: const Icon(Icons.add)
@@ -155,10 +155,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.skateboarding),
+
+      floatingActionButton: FloatingActionButton //Floating button to reset counter value
+      (
+        onPressed: _resetCounter,
+        tooltip: 'Reiniciar',
+        // tooltip: 'Reset',
+        child: const Icon(Icons.refresh),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
