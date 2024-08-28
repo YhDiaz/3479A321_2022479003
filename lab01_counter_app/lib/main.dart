@@ -4,6 +4,19 @@ void main() {
   runApp(const MyApp());
 }
 
+//Create an elevated button with a functionality and an icon
+Widget footerButton(
+  Function? onPressed,
+  Widget? child
+)
+{
+  return ElevatedButton
+  (
+    onPressed: () => onPressed!(),
+    child: child
+  );
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -105,16 +118,19 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       persistentFooterButtons:
       [
-        ElevatedButton //Footer button to decrement counter value
-        (
-          onPressed: _decrementCounter,
-          child: const Icon(Icons.remove)
-        ),
-        ElevatedButton //Footer button to increment counter value
-        (
-          onPressed: _incrementCounter,
-          child: const Icon(Icons.add)
-        )
+        footerButton(_decrementCounter, const Icon(Icons.remove)), //Footer button to decrement counter value
+        footerButton(_incrementCounter, const Icon(Icons.add)), //Footer button to increment counter value
+
+        // ElevatedButton //Footer button to decrement counter value
+        // (
+        //   onPressed: _decrementCounter,
+        //   child: const Icon(Icons.remove)
+        // ),
+        // ElevatedButton //Footer button to increment counter value
+        // (
+        //   onPressed: _incrementCounter,
+        //   child: const Icon(Icons.add)
+        // )
       ],
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
