@@ -41,7 +41,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
+      theme: ThemeData
+      (
         // This is the theme of your application.
         //
         // TRY THIS: Try running your application with "flutter run". You'll see
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
         useMaterial3: true,
+        fontFamily: 'Oswald'
       ),
       home: const MyHomePage(title: 'Aplicación Contador - Página Principal'),
     );
@@ -167,11 +169,11 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             SvgPicture.asset
             (
-              'assets/icons/211668_game_icon.svg',
+              'assets/icons/icon_game.svg',
               semanticsLabel: 'Acme Logo'
             ),
             const Text(
-              'Has presionado el botón todas estas veces:'
+              'Has presionado el botón todas estas veces:',
             ),
             Text(
               '$_counter',
