@@ -132,7 +132,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
+    var logger = Logger();
+    logger.d("Logger is working!");
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
