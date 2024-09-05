@@ -44,6 +44,10 @@ class _MyHomePageState extends State<MyHomePage>
 {
   int _counter = 0;
   String messageResult = "Presiona algún botón para jugar";
+  String defaultIcon = 'assets/icons/icon_game.svg';
+  String winIcon = 'assets/icons/icon_win.svg';
+  String defeatIcon = 'assets/icons/icon_defeat.svg';
+  String icon = 'assets/icons/icon_game.svg';
 
   void _incrementCounter()
   {
@@ -51,8 +55,16 @@ class _MyHomePageState extends State<MyHomePage>
     {
       _counter++;
 
-      if (_counter == 5) messageResult = "Has perdido!";
-      else if (_counter == 10) messageResult = "Has ganado!";
+      if (_counter == 5)
+      {
+        messageResult = "Has perdido!";
+        icon = defeatIcon;
+      }
+      else if (_counter == 10)
+      {
+        messageResult = "Has ganado!";
+        icon = winIcon;
+      }
     });
   }
 
@@ -62,8 +74,16 @@ class _MyHomePageState extends State<MyHomePage>
     {
       _counter = _counter - 1 > 0 ? _counter - 1 : 0;
 
-      if (_counter == 5) messageResult = "Has perdido!";
-      else if (_counter == 10) messageResult = "Has ganado!";
+      if (_counter == 5)
+      {
+        messageResult = "Has perdido!";
+        icon = defeatIcon;
+      }
+      else if (_counter == 10)
+      {
+        messageResult = "Has ganado!";
+        icon = winIcon;
+      }
     });
   }
 
@@ -73,6 +93,7 @@ class _MyHomePageState extends State<MyHomePage>
     {
       _counter = 0;
       messageResult = "Contador reiniciado";
+      icon = defaultIcon;
     });
   }
 
@@ -103,7 +124,8 @@ class _MyHomePageState extends State<MyHomePage>
           [
             SvgPicture.asset
             (
-              'assets/icons/icon_game.svg',
+              icon,
+              // 'assets/icons/icon_game.svg',
               semanticsLabel: 'Acme Logo'
             ),
             Text
