@@ -43,12 +43,16 @@ class MyHomePage extends StatefulWidget
 class _MyHomePageState extends State<MyHomePage>
 {
   int _counter = 0;
+  String messageResult = "Presiona algún botón para jugar";
 
   void _incrementCounter()
   {
     setState(()
     {
       _counter++;
+
+      if (_counter == 5) messageResult = "Has perdido!";
+      else if (_counter == 10) messageResult = "Has ganado!";
     });
   }
 
@@ -57,6 +61,9 @@ class _MyHomePageState extends State<MyHomePage>
     setState(()
     {
       _counter = _counter - 1 > 0 ? _counter - 1 : 0;
+
+      if (_counter == 5) messageResult = "Has perdido!";
+      else if (_counter == 10) messageResult = "Has ganado!";
     });
   }
 
@@ -65,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage>
     setState(()
     {
       _counter = 0;
+      messageResult = "Contador reiniciado";
     });
   }
 
@@ -98,9 +106,9 @@ class _MyHomePageState extends State<MyHomePage>
               'assets/icons/icon_game.svg',
               semanticsLabel: 'Acme Logo'
             ),
-            const Text
+            Text
             (
-              'Has presionado el botón todas estas veces:',
+              messageResult,
             ),
             Text
             (
