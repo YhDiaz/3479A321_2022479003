@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lab01_counter_app/pages/page_detail.dart';
 import 'package:logger/logger.dart';
 
 //Create an elevated button with a functionality and an icon
@@ -58,12 +59,12 @@ class _MyHomePageState extends State<MyHomePage>
       if (_counter == 5)
       {
         messageResult = "Has perdido!";
-        // icon = defeatIcon;
+        icon = defeatIcon;
       }
       else if (_counter == 10)
       {
         messageResult = "Has ganado!";
-        // icon = winIcon;
+        icon = winIcon;
       }
     });
   }
@@ -77,12 +78,12 @@ class _MyHomePageState extends State<MyHomePage>
       if (_counter == 5)
       {
         messageResult = "Has perdido!";
-        // icon = defeatIcon;
+        icon = defeatIcon;
       }
       else if (_counter == 10)
       {
         messageResult = "Has ganado!";
-        // icon = winIcon;
+        icon = winIcon;
       }
     });
   }
@@ -93,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage>
     {
       _counter = 0;
       messageResult = "Contador reiniciado";
-      // icon = defaultIcon;
+      icon = defaultIcon;
     });
   }
 
