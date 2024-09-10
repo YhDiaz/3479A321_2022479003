@@ -58,12 +58,12 @@ class _MyHomePageState extends State<MyHomePage>
       if (_counter == 5)
       {
         messageResult = "Has perdido!";
-        icon = defeatIcon;
+        // icon = defeatIcon;
       }
       else if (_counter == 10)
       {
         messageResult = "Has ganado!";
-        icon = winIcon;
+        // icon = winIcon;
       }
     });
   }
@@ -77,12 +77,12 @@ class _MyHomePageState extends State<MyHomePage>
       if (_counter == 5)
       {
         messageResult = "Has perdido!";
-        icon = defeatIcon;
+        // icon = defeatIcon;
       }
       else if (_counter == 10)
       {
         messageResult = "Has ganado!";
-        icon = winIcon;
+        // icon = winIcon;
       }
     });
   }
@@ -93,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage>
     {
       _counter = 0;
       messageResult = "Contador reiniciado";
-      icon = defaultIcon;
+      // icon = defaultIcon;
     });
   }
 
@@ -105,11 +105,11 @@ class _MyHomePageState extends State<MyHomePage>
 
     return Scaffold
     (
-      persistentFooterButtons:
-      [
-        footerButton(_decrementCounter, const Icon(Icons.remove)), //Footer button to decrement counter value
-        footerButton(_incrementCounter, const Icon(Icons.add)), //Footer button to increment counter value
-      ],
+      // persistentFooterButtons:
+      // [
+      //   footerButton(_decrementCounter, const Icon(Icons.remove)), //Footer button to decrement counter value
+      //   footerButton(_incrementCounter, const Icon(Icons.add)), //Footer button to increment counter value
+      // ],
       appBar: AppBar
       (
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -117,31 +117,68 @@ class _MyHomePageState extends State<MyHomePage>
       ),
       body: Center
       (
-        child: Column
+        child: Card
         (
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>
-          [
-            SvgPicture.asset
-            (
-              icon,
-              // 'assets/icons/icon_game.svg',
-              semanticsLabel: 'Acme Logo'
-            ),
-            Text
-            (
-              messageResult,
-            ),
-            Text
-            (
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+          elevation: 10, //Shadow
+          
+          child: Column
+          (
+            
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>
+            [
+              SvgPicture.asset
+              (
+                icon,
+                height: 50,
+                semanticsLabel: 'Acme Logo'
+              ),
+              Padding
+              (
+                padding: const EdgeInsets.all(50.0),
+                child: Text
+                (
+                  messageResult,
+                ),
+              ),
+              Text
+              (
+                '$_counter',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              Row //Row for space between counter and buttons
+              (
+                children:
+                [
+                  const SizedBox(height: 50)
+                ],
+              ),
+              Row //Row for buttons
+              (
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>
+                [
+                  footerButton(_decrementCounter, const Icon(Icons.remove)), //Footer button to decrement counter value
+                  const SizedBox(width: 8),
+                  footerButton(_resetCounter, const Icon(Icons.refresh)), //Footer button to reset counter value
+                  const SizedBox(width: 8),
+                  footerButton(_incrementCounter, const Icon(Icons.add)), //Footer button to increment counter value
+                ],
+              ),
+              Row //Row for space between buttons and bottom
+              (
+                children:
+                [
+                  const SizedBox(height: 8)
+                ],
+              )
+            ],
+          ),
         ),
       ),
 
-      floatingActionButton: floatingButton(_resetCounter, 'Reiniciar', const Icon(Icons.refresh)) //Floating button to reset counter value
+      // floatingActionButton: floatingButton(_resetCounter, 'Reiniciar', const Icon(Icons.refresh)) //Floating button to reset counter value
     );
   }
 }
