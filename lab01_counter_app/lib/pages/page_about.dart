@@ -7,7 +7,30 @@ class AboutPage extends StatelessWidget
   @override
   Widget build(BuildContext context)
   {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold
+    (
+      appBar: AppBar
+      (
+        title: const Text('Página Sobre'),
+      ),
+      body: Center
+      (
+        child: Row
+        (
+          mainAxisAlignment: MainAxisAlignment.center,
+          children:
+          [
+            ElevatedButton
+            (
+              onPressed: ()
+              {
+                Navigator.pop(context);
+              },
+              child: const Text('Página de Detalles'),
+            ),
+          ]
+        )
+      ),
+    );
   }
 }
