@@ -16,33 +16,43 @@ class DetailPage extends StatelessWidget
       ),
       body: Center
       (
-        child: Row
+        child: Padding
         (
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:
-          [
-            ElevatedButton //Back to home page
-            (
-              onPressed: ()
-              {
-                Navigator.pop(context);
-              },
-              child: const Text('Página Principal'),
-            ),
-            ElevatedButton //Go to about page
-            (
-              child: const Text('Página Sobre'),
-              onPressed: ()
-              {
-                Navigator.push
-                (
-                  context,
-                  MaterialPageRoute(builder: (context) => const AboutPage()),
-                );
-              }
-            ),
-          ]
-        )
+          padding: const EdgeInsets.all(50.0),
+          child: Text
+          (
+            'Esta aplicación corresponde al Laboratorio 03 del módulo Programación para Dispositivos Móviles, el cual busca implementar un card y navegación entre pantallas, principalmente',
+          ),
+        ),
+      ),
+      floatingActionButton: Row
+      (
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:
+        [
+          const SizedBox(width: 30),
+          ElevatedButton //Back to home page
+          (
+            onPressed: ()
+            {
+              Navigator.pop(context);
+            },
+            child: const Text('Página Principal'),
+          ),
+          const SizedBox(width: 15), //Space between buttons
+          ElevatedButton //Go to about page
+          (
+            child: const Text('Página Sobre'),
+            onPressed: ()
+            {
+              Navigator.push
+              (
+                context,
+                MaterialPageRoute(builder: (context) => const AboutPage()),
+              );
+            }
+          ),
+        ]
       ),
     );
   }

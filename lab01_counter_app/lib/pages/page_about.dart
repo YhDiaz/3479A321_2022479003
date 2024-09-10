@@ -15,21 +15,30 @@ class AboutPage extends StatelessWidget
       ),
       body: Center
       (
-        child: Row
+        child: Padding
         (
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:
-          [
-            ElevatedButton
-            (
-              onPressed: ()
-              {
-                Navigator.pop(context);
-              },
-              child: const Text('Página de Detalles'),
-            ),
-          ]
-        )
+          padding: const EdgeInsets.all(50.0),
+          child: Text
+          (
+            'Aplicación desarrollada por Joel Díaz - Ingeniería en Desarrollo de Videojuegos y Realidad Virtual - Universidad de Talca',
+          ),
+        ),
+      ),
+      floatingActionButton: Row
+      (
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:
+        [
+          const SizedBox(width: 30),
+          ElevatedButton
+          (
+            onPressed: ()
+            {
+              Navigator.pop(context);
+            },
+            child: const Text('Página de Detalles'),
+          ),
+        ]
       ),
     );
   }
