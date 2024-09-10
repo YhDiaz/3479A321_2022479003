@@ -178,7 +178,18 @@ class _MyHomePageState extends State<MyHomePage>
           ),
         ),
       ),
-
+      floatingActionButton: ElevatedButton
+      (
+        child: const Text('Página de Detalles'),
+        onPressed: ()
+        {
+          Navigator.push
+          (
+            context,
+            MaterialPageRoute(builder: (context) => const DetailPage()),
+          );
+        },
+      ),
       // floatingActionButton: floatingButton(_resetCounter, 'Reiniciar', const Icon(Icons.refresh)) //Floating button to reset counter value
     );
   }
