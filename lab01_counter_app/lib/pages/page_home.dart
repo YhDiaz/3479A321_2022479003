@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lab01_counter_app/pages/page_detail.dart';
@@ -47,6 +49,12 @@ class MyHomePage extends StatefulWidget
 
 class _MyHomePageState extends State<MyHomePage>
 {
+  final Logger logger = Logger();
+
+  _MyHomePageState() {
+    logger.d('mounted variable is $mounted!');
+  }
+
   int _counter = 0;
   String messageResult = "Presiona algún botón para jugar";
   String defaultIcon = 'assets/icons/icon_game.svg';
@@ -103,10 +111,48 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   @override
+  void initState() {
+    super.initState();
+    logger.d('Home page was already included in tree using init State method!');
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    logger.d('Dependencies in home page has changed!');
+  }
+
+  @override void setState(VoidCallback fn) {
+    super.setState(fn);
+    logger.d('Rebuilding widget due to change in state!');
+  }
+
+  @override void didUpdateWidget(covariant MyHomePage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    logger.d('Rebuiling widget comparing old widget with the new one!');
+  }
+
+  @override void deactivate() {
+    super.deactivate();
+    logger.d('Widget removed temporarily!');
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    logger.d('Widget removed permanently!');
+  }
+
+  @override
+  void reassemble() {
+    super.reassemble();
+    logger.d('Hot reloading app!');
+  }
+
+  @override
   Widget build(BuildContext context)
   {
-    var logger = Logger();
-    logger.d("Logger is working!");
+    logger.d("Home page build method was overrided and now mounted is $mounted!");
 
     return Scaffold
     (
@@ -187,11 +233,11 @@ class _MyHomePageState extends State<MyHomePage>
         child: const Text('Página de Detalles'),
         onPressed: ()
         {
-          Navigator.push
-          (
-            context,
-            MaterialPageRoute(builder: (context) => const DetailPage()),
-          );
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DetailPage()));
+          // (
+          //   context,
+          //   MaterialPageRoute(builder: (context) => const DetailPage()),
+          // );
         },
       ),
       // floatingActionButton: floatingButton(_resetCounter, 'Reiniciar', const Icon(Icons.refresh)) //Floating button to reset counter value
