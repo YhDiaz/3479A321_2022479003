@@ -38,7 +38,11 @@ class MyHomePage extends StatefulWidget
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyHomePage> createState() {
+    var logger = Logger();
+    logger.d("Hello from create state method!");    
+    return _MyHomePageState();
+  }
 }
 
 class _MyHomePageState extends State<MyHomePage>
