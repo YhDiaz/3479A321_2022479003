@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -61,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage>
   String winIcon = 'assets/icons/icon_win.svg';
   String defeatIcon = 'assets/icons/icon_defeat.svg';
   String icon = 'assets/icons/icon_game.svg';
+  static ChildCounterWidget childCounter = ChildCounterWidget(counter: 0);
 
   void _incrementCounter()
   {
@@ -198,6 +198,7 @@ class _MyHomePageState extends State<MyHomePage>
                 '$_counter',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
+              ChildCounterWidget(counter: _counter),
               Row //Row for space between counter and buttons
               (
                 children:
@@ -226,21 +227,49 @@ class _MyHomePageState extends State<MyHomePage>
               )
             ],
           ),
-        ),
+        )
       ),
       floatingActionButton: ElevatedButton
       (
         child: const Text('Página de Detalles'),
         onPressed: ()
         {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DetailPage()));
-          // (
-          //   context,
-          //   MaterialPageRoute(builder: (context) => const DetailPage()),
-          // );
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const DetailPage())
+          );
         },
       ),
       // floatingActionButton: floatingButton(_resetCounter, 'Reiniciar', const Icon(Icons.refresh)) //Floating button to reset counter value
     );
+  }
+}
+
+class ChildCounterWidget extends StatefulWidget {
+  const ChildCounterWidget({super.key, required this.counter});
+  final int counter;
+
+  @override
+  State<StatefulWidget> createState() => _ChildCounterWidgetState(counter);
+}
+
+class _ChildCounterWidgetState extends State<ChildCounterWidget> {
+
+  static int counter = 0;
+
+  _ChildCounterWidgetState(int _counter) {
+    counter = _counter;
+  }
+
+  @override
+  void didUpdateWidget(covariant ChildCounterWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    Logger logger = Logger();
+    logger.d('Child widget update');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Text('Child counter: $counter');
   }
 }
