@@ -11,6 +11,7 @@ class DetailPage extends StatelessWidget
   @override
   Widget build(BuildContext context)
   {
+    context.read<AppData>().actions.add('Ubicación actual: Página detalle');
     return Scaffold
     (
       appBar: AppBar

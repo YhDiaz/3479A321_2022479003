@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lab01_counter_app/models/app_data.dart';
+import 'package:provider/provider.dart';
 
 class AboutPage extends StatelessWidget
 {
@@ -7,6 +9,7 @@ class AboutPage extends StatelessWidget
   @override
   Widget build(BuildContext context)
   {
+    context.read<AppData>().actions.add('Ubicación actual: Página sobre');
     return Scaffold
     (
       appBar: AppBar

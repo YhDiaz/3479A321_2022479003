@@ -156,6 +156,7 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   Widget build(BuildContext context) {
     logger.d("Home page build method was overrided and now mounted is $mounted!");
+    context.read<AppData>().actions.add('Ubicación actual: Página principal');
 
     return Scaffold(
       appBar: AppBar(
@@ -181,6 +182,8 @@ class _MyHomePageState extends State<MyHomePage>
                 setState(() {
                   _selectedIndex = 0;
                 });
+                context.read<AppData>().actions.add('Se abrió el drawer (Pagina principal)');
+                context.read<AppData>().actions.add('Se seleccionó la opción Contador (Página principal > Drawer)');
                 Navigator.pop(context);
               },
             ),
@@ -192,6 +195,8 @@ class _MyHomePageState extends State<MyHomePage>
                   _selectedIndex = 1;
                 });
                 // Navigator.pop(context);
+                context.read<AppData>().actions.add('Se abrió el drawer (Página principal)');
+                context.read<AppData>().actions.add('Se seleccionó la opción Detalle (Página principal > Drawer)');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const DetailPage())
@@ -205,6 +210,8 @@ class _MyHomePageState extends State<MyHomePage>
                 setState(() {
                   _selectedIndex = 2;
                 });
+                context.read<AppData>().actions.add('Se abrió el drawer (Página principal)');
+                context.read<AppData>().actions.add('Se seleccionó la opción Sobre (Página principal > Drawer)');
                 // Navigator.pop(context);
                 Navigator.push(
                   context,
@@ -220,6 +227,8 @@ class _MyHomePageState extends State<MyHomePage>
                 setState(() {
                   _selectedIndex = 3;
                 });
+                context.read<AppData>().actions.add('Se abrió el drawer (Página principal)');
+                context.read<AppData>().actions.add('Se seleccionó la opción Auditoría (Página principal > Drawer)');
                 // Navigator.pop(context);
                 Navigator.push(
                   context,
