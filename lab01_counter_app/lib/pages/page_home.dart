@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lab01_counter_app/pages/page_about.dart';
+import 'package:lab01_counter_app/pages/page_audit.dart';
 import 'package:lab01_counter_app/pages/page_detail.dart';
 import 'package:logger/logger.dart';
 
@@ -60,6 +61,8 @@ class _MyHomePageState extends State<MyHomePage>
   String winIcon = 'assets/icons/icon_win.svg';
   String defeatIcon = 'assets/icons/icon_defeat.svg';
   String icon = 'assets/icons/icon_game.svg';
+
+  int _selectedIndex = 0;
 
   void _incrementCounter()
   {
@@ -149,26 +152,84 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     logger.d("Home page build method was overrided and now mounted is $mounted!");
 
-    return Scaffold
-    (
-      // persistentFooterButtons:
-      // [
-      //   footerButton(_decrementCounter, const Icon(Icons.remove)), //Footer button to decrement counter value
-      //   footerButton(_incrementCounter, const Icon(Icons.add)), //Footer button to increment counter value
-      // ],
-      appBar: AppBar
-      (
+    return Scaffold(
+      appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center
-      (
-        child: Card
-        (
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.green
+              ),
+              child: Text(
+                'Navegación'
+              )
+            ),
+            ListTile( // Counter page.
+              title: const Text('Contador'),
+              selected: _selectedIndex == 0,
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 0;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile( // Detail page.
+              title: const Text('Detalle'),
+              selected: _selectedIndex == 1,
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 1;
+                });
+                // Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const DetailPage())
+                );
+              },
+            ),
+            ListTile( // About page.
+              title: const Text('Sobre'),
+              selected: _selectedIndex == 2,
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 2;
+                });
+                // Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AboutPage())
+                );
+              },
+            ),
+            // Audit page.
+            ListTile( // Counter page.
+              title: const Text('Auditoría'),
+              selected: _selectedIndex == 3,
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 3;
+                });
+                // Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AuditPage(title: 'Auditoría'))
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+      body: Center(
+        child: Card(
           elevation: 10, //Shadow
           
           child: Column
