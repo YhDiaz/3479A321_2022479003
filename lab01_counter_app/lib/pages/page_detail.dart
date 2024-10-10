@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lab01_counter_app/main.dart';
+import 'package:lab01_counter_app/models/app_data.dart';
 import 'package:lab01_counter_app/pages/page_about.dart';
+import 'package:provider/provider.dart';
 
 class DetailPage extends StatelessWidget
 {
@@ -16,13 +19,19 @@ class DetailPage extends StatelessWidget
       ),
       body: Center
       (
-        child: Padding
-        (
-          padding: const EdgeInsets.all(50.0),
-          child: Text
-          (
-            'Esta aplicación corresponde al Laboratorio 03 del módulo Programación para Dispositivos Móviles, el cual busca implementar un card y navegación entre pantallas, principalmente',
-          ),
+        child: Column(
+          children: [
+            Padding
+            (
+              padding: const EdgeInsets.all(50.0),
+              child: Text
+              (
+                'Esta aplicación corresponde al Laboratorio 03 del módulo Programación para Dispositivos Móviles, el cual busca implementar un card y navegación entre pantallas, principalmente',
+              ),
+            ),
+            const SizedBox(height: 10,),
+            Text('Contador: ${context.read<AppData>().counter}')
+          ],
         ),
       ),
       floatingActionButton: Row

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lab01_counter_app/models/app_data.dart';
 import 'package:lab01_counter_app/pages/page_about.dart';
 import 'package:lab01_counter_app/pages/page_audit.dart';
 import 'package:lab01_counter_app/pages/page_detail.dart';
 import 'package:logger/logger.dart';
+import 'package:provider/provider.dart';
 
 //Create an elevated button with a functionality and an icon
 Widget footerButton(
@@ -255,7 +257,8 @@ class _MyHomePageState extends State<MyHomePage>
               ),
               Text
               (
-                '$_counter',
+                // '$_counter',
+                '${context.read<AppData>().counter}',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               ChildCounterWidget(counter: _counter),
@@ -271,11 +274,23 @@ class _MyHomePageState extends State<MyHomePage>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>
                 [
-                  footerButton(_decrementCounter, const Icon(Icons.remove)), //Footer button to decrement counter value
+                  // footerButton(_decrementCounter, const Icon(Icons.remove)), //Footer button to decrement counter value
+                  ElevatedButton(
+                    onPressed: context.read<AppData>().decrementCounter,
+                    child: Icon(Icons.remove)
+                  ),
                   const SizedBox(width: 8),
-                  footerButton(_resetCounter, const Icon(Icons.refresh)), //Footer button to reset counter value
+                  // footerButton(_resetCounter, const Icon(Icons.refresh)), //Footer button to reset counter value
+                  ElevatedButton(
+                    onPressed: context.read<AppData>().resetCounter,
+                    child: Icon(Icons.refresh)
+                  ),
                   const SizedBox(width: 8),
-                  footerButton(_incrementCounter, const Icon(Icons.add)), //Footer button to increment counter value
+                  // footerButton(_incrementCounter, const Icon(Icons.add)), //Footer button to increment counter value
+                  ElevatedButton(
+                    onPressed: context.read<AppData>().incrementCounter,
+                    child: Icon(Icons.add)
+                  ),
                 ],
               ),
               Row //Row for space between buttons and bottom
