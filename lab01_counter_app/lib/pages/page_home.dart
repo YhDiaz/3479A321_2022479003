@@ -60,7 +60,6 @@ class _MyHomePageState extends State<MyHomePage>
   String winIcon = 'assets/icons/icon_win.svg';
   String defeatIcon = 'assets/icons/icon_defeat.svg';
   String icon = 'assets/icons/icon_game.svg';
-  static ChildCounterWidget childCounter = ChildCounterWidget(counter: 0);
 
   void _incrementCounter()
   {
