@@ -331,5 +331,5 @@ class _ChildCounterWidgetState extends State<ChildCounterWidget> {
   @override
   Widget build(BuildContext context) {
     return Text('Child counter: $counter');
-  }
+    }
 }
