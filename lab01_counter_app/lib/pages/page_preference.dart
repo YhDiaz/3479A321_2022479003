@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lab01_counter_app/models/app_data.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencePage extends StatefulWidget
 {
@@ -17,8 +18,49 @@ class PreferencePage extends StatefulWidget
 }
 
 class _PreferencePageState extends State<PreferencePage> {
-  String userName = '';
-  double counter = 0;
+  String _userName = '';
+  double _counter = 0;
+
+  // _PreferencePageState() {
+  //   _userName = context.read<AppData>().userName;
+  //   _counter = context.read<AppData>().counter.roundToDouble();
+  // }
+
+  Future<void> _loadPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _userName = prefs.getString('userName') ?? '';
+      _counter = prefs.getDouble('counter') ?? 0;
+      // _userName = context.read<AppData>().userName;
+      // _counter = context.read<AppData>().counter.roundToDouble();
+      // print('Counter value $_counter is loaded');
+      // print('Username value $_userName is loaded');
+    });
+  }
+
+  Future<void> _savePreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    // context.read<AppData>().userName = _userName;
+    // context.read<AppData>().counter = _counter.round();
+    setState(() {
+      prefs.setString('userName', _userName);
+      prefs.setDouble('counter', _counter);
+    });
+  }
+
+  // //Comodin, recordad que trabajamos con estados
+  // void _updateUserName(String newName) {
+  //   setState(() {
+  //     _userName = newName;
+  //   });
+  //   _savePreferences();
+  // }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPreferences();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +75,15 @@ class _PreferencePageState extends State<PreferencePage> {
             Container( // User name and text form field section.
               child: Column(
                 children: [
-                  Text('Nombre de usuario: $userName'),
+                  Text('Nombre de usuario: $_userName'),
                   const SizedBox(height: 10,),
                   TextFormField(
-                    onFieldSubmitted: (value) => {
+                    onFieldSubmitted: (value) {
                       setState(() {
-                        userName = value;
+                        _userName = value;
                         // print('User name is $userName');
-                      })                      
+                      });
+                      _savePreferences();           
                     },
                   )
                 ],
@@ -50,15 +93,16 @@ class _PreferencePageState extends State<PreferencePage> {
             Container( // Counter and counter slider section.
               child: Column(
                 children: [
-                  Text('Contador: ${counter.round().toString()}'),
+                  Text('Contador: ${_counter.round().toString()}'),
                   const SizedBox(height: 10,),
                   Slider(
-                    value: counter,
+                    value: _counter,
                     max: 100,
                     onChanged: (value) {
                       setState(() {
-                        counter = value;
+                        _counter = value;
                       });
+                      _savePreferences();
                     }
                   )
                 ],

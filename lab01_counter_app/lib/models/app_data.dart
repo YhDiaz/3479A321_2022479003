@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppData extends ChangeNotifier {
+  String userName = '';
   int counter = 0;
   List<String> actions = List.empty(growable: true);
 
