@@ -60,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   double _counter = 0.0;
+  String _userName = '';
   String messageResult = "Presiona algún botón para jugar";
   String defaultIcon = 'assets/icons/icon_game.svg';
   String winIcon = 'assets/icons/icon_win.svg';
@@ -120,6 +121,10 @@ class _MyHomePageState extends State<MyHomePage>
     final preferences = await SharedPreferences.getInstance();
 
     setState(() {
+      print('El valor de retorn de preferences.getstring es ${
+        preferences.getString('username')
+      }');
+      _userName = preferences.getString('userName') ?? '';
       _counter = preferences.getDouble('counter') ?? 0;
     });
   }
@@ -259,7 +264,9 @@ class _MyHomePageState extends State<MyHomePage>
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const PreferencePage(title: 'Auditoría'))
-                );
+                ).then((_) {
+                  _loadPreferences();
+                });
               },
             ),
           ],
@@ -287,6 +294,11 @@ class _MyHomePageState extends State<MyHomePage>
                 (
                   messageResult,
                 ),
+              ),
+              Text(
+                _userName != '' ?
+                  'Hola $_userName' :
+                  'Hola, puedes modificar tu nombre de usuario en la pantalla Preferencia'
               ),
               Text
               (

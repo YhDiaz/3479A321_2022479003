@@ -45,6 +45,8 @@ class _PreferencePageState extends State<PreferencePage> {
     setState(() {
       prefs.setString('userName', _userName);
       prefs.setDouble('counter', _counter);
+
+      print('Setting username as $_userName');
     });
   }
 
