@@ -7,6 +7,7 @@ import 'package:lab01_counter_app/pages/page_detail.dart';
 import 'package:lab01_counter_app/pages/page_preference.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //Create an elevated button with a functionality and an icon
 Widget footerButton(
@@ -58,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage>
     logger.d('mounted variable is $mounted!');
   }
 
-  int _counter = 0;
+  double _counter = 0.0;
   String messageResult = "Presiona algún botón para jugar";
   String defaultIcon = 'assets/icons/icon_game.svg';
   String winIcon = 'assets/icons/icon_win.svg';
@@ -115,10 +116,19 @@ class _MyHomePageState extends State<MyHomePage>
     });
   }
 
+  Future<void> _loadPreferences() async {
+    final preferences = await SharedPreferences.getInstance();
+
+    setState(() {
+      _counter = preferences.getDouble('counter') ?? 0;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     logger.d('Home page was already included in tree using init State method!');
+    _loadPreferences();
   }
 
   @override
@@ -258,10 +268,8 @@ class _MyHomePageState extends State<MyHomePage>
       body: Center(
         child: Card(
           elevation: 10, //Shadow
-          
           child: Column
           (
-            
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>
@@ -283,7 +291,8 @@ class _MyHomePageState extends State<MyHomePage>
               Text
               (
                 // '$_counter',
-                '${context.read<AppData>().counter}',
+                // '${context.read<AppData>().counter}',
+                '${_counter.round()}',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               ChildCounterWidget(counter: _counter),
@@ -347,7 +356,7 @@ class _MyHomePageState extends State<MyHomePage>
 
 class ChildCounterWidget extends StatefulWidget {
   const ChildCounterWidget({super.key, required this.counter});
-  final int counter;
+  final double counter;
 
   @override
   State<StatefulWidget> createState() => _ChildCounterWidgetState(counter);
@@ -355,9 +364,9 @@ class ChildCounterWidget extends StatefulWidget {
 
 class _ChildCounterWidgetState extends State<ChildCounterWidget> {
 
-  static int counter = 0;
+  static double counter = 0;
 
-  _ChildCounterWidgetState(int _counter) {
+  _ChildCounterWidgetState(double _counter) {
     counter = _counter;
   }
 
