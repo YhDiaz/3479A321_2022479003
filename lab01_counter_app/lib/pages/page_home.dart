@@ -4,6 +4,7 @@ import 'package:lab01_counter_app/models/app_data.dart';
 import 'package:lab01_counter_app/pages/page_about.dart';
 import 'package:lab01_counter_app/pages/page_audit.dart';
 import 'package:lab01_counter_app/pages/page_detail.dart';
+import 'package:lab01_counter_app/pages/page_preference.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
@@ -233,6 +234,21 @@ class _MyHomePageState extends State<MyHomePage>
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const AuditPage(title: 'Auditoría'))
+                );
+              },
+            ),
+            ListTile( // Preference page.
+              title: const Text('Preferencia'),
+              selected: _selectedIndex == 0,
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 0;
+                });
+                context.read<AppData>().actions.add('Se abrió el drawer (Pagina principal)');
+                context.read<AppData>().actions.add('Se seleccionó la opción Preferencia (Página principal > Drawer)');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const PreferencePage(title: 'Auditoría'))
                 );
               },
             ),
