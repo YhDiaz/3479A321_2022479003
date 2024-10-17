@@ -4,18 +4,16 @@ import 'package:logger/logger.dart';
 import 'package:lab01_counter_app/pages/page_home.dart';
 import 'package:provider/provider.dart';
 
-void main()
-{
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget
-{
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     var logger = Logger();
     logger.d("Logger is working!");
 
