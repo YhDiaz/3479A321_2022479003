@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lab01_counter_app/main.dart';
 import 'package:lab01_counter_app/models/app_data.dart';
 import 'package:lab01_counter_app/pages/page_about.dart';
 import 'package:provider/provider.dart';
