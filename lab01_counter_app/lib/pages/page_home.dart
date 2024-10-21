@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lab01_counter_app/models/app_data.dart';
+import 'package:lab01_counter_app/models/audit.dart';
 import 'package:lab01_counter_app/pages/page_about.dart';
 import 'package:lab01_counter_app/pages/page_audit.dart';
 import 'package:lab01_counter_app/pages/page_detail.dart';
 import 'package:lab01_counter_app/pages/page_preference.dart';
+import 'package:lab01_counter_app/utils/database_helper.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -53,6 +55,7 @@ class MyHomePage extends StatefulWidget
 
 class _MyHomePageState extends State<MyHomePage>
 {
+  DatabaseHelper databaseHelper = DatabaseHelper.instance;
   final Logger logger = Logger();
 
   _MyHomePageState() {
@@ -121,9 +124,9 @@ class _MyHomePageState extends State<MyHomePage>
     final preferences = await SharedPreferences.getInstance();
 
     setState(() {
-      print('El valor de retorn de preferences.getstring es ${
-        preferences.getString('username')
-      }');
+      // print('El valor de retorn de preferences.getstring es ${
+      //   preferences.getString('username')
+      // }');
       _userName = preferences.getString('userName') ?? '';
       _counter = preferences.getDouble('counter') ?? 0;
     });
@@ -172,8 +175,8 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   Widget build(BuildContext context) {
     logger.d("Home page build method was overrided and now mounted is $mounted!");
-    context.read<AppData>().actions.add('Ubicación actual: Página principal');
-
+    // context.read<AppData>().actions.add('Ubicación actual: Página principal');
+    // databaseHelper.insert(Audit(id: 0, action: 'Ubicación actual: Página principal'));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -198,8 +201,10 @@ class _MyHomePageState extends State<MyHomePage>
                 setState(() {
                   _selectedIndex = 0;
                 });
-                context.read<AppData>().actions.add('Se abrió el drawer (Pagina principal)');
-                context.read<AppData>().actions.add('Se seleccionó la opción Contador (Página principal > Drawer)');
+                databaseHelper.insert(Audit(id: 0, action: 'Se abrió el drawer (Pagina principal)'));
+                databaseHelper.insert(Audit(id: 0, action: 'Se seleccionó la opción Contador (Página principal > Drawer)'));
+                // context.read<AppData>().actions.add('Se abrió el drawer (Pagina principal)');
+                // context.read<AppData>().actions.add('Se seleccionó la opción Contador (Página principal > Drawer)');
                 Navigator.pop(context);
               },
             ),
@@ -211,8 +216,10 @@ class _MyHomePageState extends State<MyHomePage>
                   _selectedIndex = 1;
                 });
                 // Navigator.pop(context);
-                context.read<AppData>().actions.add('Se abrió el drawer (Página principal)');
-                context.read<AppData>().actions.add('Se seleccionó la opción Detalle (Página principal > Drawer)');
+                databaseHelper.insert(Audit(id: 0, action: 'Se abrió el drawer (Pagina principal)'));
+                databaseHelper.insert(Audit(id: 0, action: 'Se seleccionó la opción Detalle (Página principal > Drawer)'));
+                // context.read<AppData>().actions.add('Se abrió el drawer (Página principal)');
+                // context.read<AppData>().actions.add('Se seleccionó la opción Detalle (Página principal > Drawer)');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const DetailPage())
@@ -226,8 +233,10 @@ class _MyHomePageState extends State<MyHomePage>
                 setState(() {
                   _selectedIndex = 2;
                 });
-                context.read<AppData>().actions.add('Se abrió el drawer (Página principal)');
-                context.read<AppData>().actions.add('Se seleccionó la opción Sobre (Página principal > Drawer)');
+                databaseHelper.insert(Audit(id: 0, action: 'Se abrió el drawer (Pagina principal)'));
+                databaseHelper.insert(Audit(id: 0, action: 'Se seleccionó la opción Sobre (Página principal > Drawer)'));
+                // context.read<AppData>().actions.add('Se abrió el drawer (Página principal)');
+                // context.read<AppData>().actions.add('Se seleccionó la opción Sobre (Página principal > Drawer)');
                 // Navigator.pop(context);
                 Navigator.push(
                   context,
@@ -235,16 +244,17 @@ class _MyHomePageState extends State<MyHomePage>
                 );
               },
             ),
-            // Audit page.
-            ListTile( // Counter page.
+            ListTile( // Audit page.
               title: const Text('Auditoría'),
               selected: _selectedIndex == 3,
               onTap: () {
                 setState(() {
                   _selectedIndex = 3;
                 });
-                context.read<AppData>().actions.add('Se abrió el drawer (Página principal)');
-                context.read<AppData>().actions.add('Se seleccionó la opción Auditoría (Página principal > Drawer)');
+                databaseHelper.insert(Audit(id: 0, action: 'Se abrió el drawer (Pagina principal)'));
+                databaseHelper.insert(Audit(id: 0, action: 'Se seleccionó la opción Auditoría (Página principal > Drawer)'));
+                // context.read<AppData>().actions.add('Se abrió el drawer (Página principal)');
+                // context.read<AppData>().actions.add('Se seleccionó la opción Auditoría (Página principal > Drawer)');
                 // Navigator.pop(context);
                 Navigator.push(
                   context,
@@ -259,11 +269,13 @@ class _MyHomePageState extends State<MyHomePage>
                 setState(() {
                   _selectedIndex = 0;
                 });
-                context.read<AppData>().actions.add('Se abrió el drawer (Pagina principal)');
-                context.read<AppData>().actions.add('Se seleccionó la opción Preferencia (Página principal > Drawer)');
+                databaseHelper.insert(Audit(id: 0, action: 'Se abrió el drawer (Pagina principal)'));
+                databaseHelper.insert(Audit(id: 0, action: 'Se seleccionó la opción Preferencia (Página principal > Drawer)'));
+                // context.read<AppData>().actions.add('Se abrió el drawer (Pagina principal)');
+                // context.read<AppData>().actions.add('Se seleccionó la opción Preferencia (Página principal > Drawer)');
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const PreferencePage(title: 'Auditoría'))
+                  MaterialPageRoute(builder: (context) => const PreferencePage(title: 'Preferencia'))
                 ).then((_) {
                   _loadPreferences();
                 });

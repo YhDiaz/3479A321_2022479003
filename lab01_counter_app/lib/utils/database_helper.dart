@@ -1,5 +1,5 @@
-
 import 'package:lab01_counter_app/models/audit.dart';
+import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
@@ -19,11 +19,15 @@ class DatabaseHelper {
 
   Future<Database> _initDatabase() async {
     final databasePath = await getDatabasesPath();
-    final path = '$databasePath/notes.db';
+    final path = '$databasePath/audits.db';
     return await openDatabase(
-      path,
+      join(await getDatabasesPath(), 'audits.db'),
+      onCreate: (db, version) {
+        return db.execute(
+          'CREATE TABLE audits(id INTEGER PRIMARY KEY, action TEXT)',
+        );
+      },
       version: 1,
-      onCreate: _createDatabase,
     );
   }
 
@@ -36,28 +40,56 @@ class DatabaseHelper {
       ''');
   }
 
-  Future<Audit> insert(Audit audit) async {
-    final db = await instance.database;
-    final id = await db.insert('audits', audit.toJson());
-    return audit.copy(id: id);
-  }
-
-  Future<Audit> recovery(int id) async {
-    final db = await instance.database;
-    final maps = await db.query(
+  Future<void> insert(Audit audit) async {
+    final db = await database;
+    await db.insert(
       'audits',
-      columns: [
-        'id',
-        'action'
-      ],
-      where: 'id = ?',
-      whereArgs: [id],
+      audit.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
     );
-
-    if (maps.isNotEmpty) {
-      return Audit.fromJson(maps.first);
-    } else {
-      throw Exception('ID $id not found');
-    }
   }
+
+  // Future<Audit> insert(Audit audit) async {
+  //   final db = await instance.database;
+  //   final id = await db.insert('audits', audit.toJson());
+  //   return audit.copy(id: id);
+  // }
+
+  Future<List<Audit>> read() async {
+    final db = await database;
+    final List<Map<String, Object?>> auditMaps = await db.query('audits');
+    return [
+      for (final {
+            'id': id as int,
+            'action': action as String,
+          } in auditMaps)
+        Audit(id: id, action: action),
+    ];
+  }
+
+  // Future<Audit> recovery(int id) async {
+  //   final db = await instance.database;
+  //   final maps = await db.query(
+  //     'audits',
+  //     columns: [
+  //       'id',
+  //       'action'
+  //     ],
+  //     where: 'id = ?',
+  //     whereArgs: [id],
+  //   );
+
+  //   if (maps.isNotEmpty) {
+  //     return Audit.fromJson(maps.first);
+  //   } else {
+  //     throw Exception('ID $id not found');
+  //   }
+  // }
+
+  // Future<List<Audit>> readAll() async {
+  //   final db = await instance.database;
+  //   const orderBy = 'id DESC';
+  //   final result = await db.query('audits', orderBy: orderBy);
+  //   return result.map((json) => Audit.fromJson(json)).toList();
+  // }
 }

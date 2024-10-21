@@ -9,7 +9,7 @@ class AboutPage extends StatelessWidget
   @override
   Widget build(BuildContext context)
   {
-    context.read<AppData>().actions.add('Ubicación actual: Página sobre');
+    // context.read<AppData>().actions.add('Ubicación actual: Página sobre');
     return Scaffold
     (
       appBar: AppBar

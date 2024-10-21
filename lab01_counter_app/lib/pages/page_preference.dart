@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lab01_counter_app/models/app_data.dart';
+import 'package:lab01_counter_app/models/audit.dart';
+import 'package:lab01_counter_app/utils/database_helper.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -66,7 +68,7 @@ class _PreferencePageState extends State<PreferencePage> {
 
   @override
   Widget build(BuildContext context) {
-    context.read<AppData>().actions.add('Ubicación actual: Página preferencia');
+    // context.read<AppData>().actions.add('Ubicación actual: Página preferencia');
     return Scaffold(
       appBar: AppBar(
         title: const Text('Preferencia'),

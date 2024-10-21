@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lab01_counter_app/models/app_data.dart';
+import 'package:lab01_counter_app/models/audit.dart';
+import 'package:lab01_counter_app/utils/database_helper.dart';
 import 'package:logger/logger.dart';
-import 'package:provider/provider.dart';
 
 class AuditPage extends StatefulWidget {
   const AuditPage({super.key, required this.title});
@@ -18,9 +18,21 @@ class AuditPage extends StatefulWidget {
 
 class _AuditPageState extends State<AuditPage> {
 
+  DatabaseHelper databaseHelper = DatabaseHelper.instance;
+  List<Audit> audits = [];
+  // int auditsLength = 0;
+
   @override
   Widget build(BuildContext context) {
-    context.read<AppData>().actions.add('Ubicación actual: Página auditoría');
+    // context.read<AppData>().actions.add('Ubicación actual: Página auditoría');
+    
+    databaseHelper.insert(Audit(id: 0, action: 'Ubicación actual: Página auditoría'));
+    // audits = databaseHelper.readAll();
+    databaseHelper.read().then((value) {
+      setState(() {
+        audits = value;
+      });
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text('Auditoría'),
@@ -28,16 +40,26 @@ class _AuditPageState extends State<AuditPage> {
       body: Center(
         child: ListView(
           padding: EdgeInsets.all(8),
-          children: List.generate(context.read<AppData>().actions.length, (int index) {
+          children: List.generate(audits.length, (int index) {
               // return Text(context.read<AppData>().actions[index]);
               return Container(
                 height: 50,
                 color: Colors.amber[600],
                 child: Center(
-                  child: Text(context.read<AppData>().actions[index])
+                  child: Text(audits[index].action)
                 ),
               );
             })
+          // children: List.generate(context.read<AppData>().actions.length, (int index) {
+          //     // return Text(context.read<AppData>().actions[index]);
+          //     return Container(
+          //       height: 50,
+          //       color: Colors.amber[600],
+          //       child: Center(
+          //         child: Text(context.read<AppData>().actions[index])
+          //       ),
+          //     );
+          //   })
             
             // Container(
             //   height: 50,
