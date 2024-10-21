@@ -72,61 +72,10 @@ class _MyHomePageState extends State<MyHomePage>
 
   int _selectedIndex = 0;
 
-  void _incrementCounter()
-  {
-    setState(()
-    {
-      _counter++;
-
-      if (_counter == 5)
-      {
-        messageResult = "Has perdido!";
-        icon = defeatIcon;
-      }
-      else if (_counter == 10)
-      {
-        messageResult = "Has ganado!";
-        icon = winIcon;
-      }
-    });
-  }
-
-  void _decrementCounter()
-  {
-    setState(()
-    {
-      _counter = _counter - 1 > 0 ? _counter - 1 : 0;
-
-      if (_counter == 5)
-      {
-        messageResult = "Has perdido!";
-        icon = defeatIcon;
-      }
-      else if (_counter == 10)
-      {
-        messageResult = "Has ganado!";
-        icon = winIcon;
-      }
-    });
-  }
-
-  void _resetCounter()
-  {
-    setState(()
-    {
-      _counter = 0;
-      messageResult = "Contador reiniciado";
-      icon = defaultIcon;
-    });
-  }
-
   Future<void> _loadPreferences() async {
     final preferences = await SharedPreferences.getInstance();
 
     setState(() {
-      // print('El valor de retorn de preferences.getstring es ${
-      //   preferences.getString('username')
-      // }');
       _userName = preferences.getString('userName') ?? '';
       _counter = preferences.getDouble('counter') ?? 0;
     });
@@ -175,8 +124,6 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   Widget build(BuildContext context) {
     logger.d("Home page build method was overrided and now mounted is $mounted!");
-    // context.read<AppData>().actions.add('Ubicación actual: Página principal');
-    // databaseHelper.insert(Audit(id: 0, action: 'Ubicación actual: Página principal'));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -203,8 +150,6 @@ class _MyHomePageState extends State<MyHomePage>
                 });
                 databaseHelper.insert(Audit(id: 0, action: 'Se abrió el drawer (Pagina principal)'));
                 databaseHelper.insert(Audit(id: 0, action: 'Se seleccionó la opción Contador (Página principal > Drawer)'));
-                // context.read<AppData>().actions.add('Se abrió el drawer (Pagina principal)');
-                // context.read<AppData>().actions.add('Se seleccionó la opción Contador (Página principal > Drawer)');
                 Navigator.pop(context);
               },
             ),
@@ -215,11 +160,8 @@ class _MyHomePageState extends State<MyHomePage>
                 setState(() {
                   _selectedIndex = 1;
                 });
-                // Navigator.pop(context);
                 databaseHelper.insert(Audit(id: 0, action: 'Se abrió el drawer (Pagina principal)'));
                 databaseHelper.insert(Audit(id: 0, action: 'Se seleccionó la opción Detalle (Página principal > Drawer)'));
-                // context.read<AppData>().actions.add('Se abrió el drawer (Página principal)');
-                // context.read<AppData>().actions.add('Se seleccionó la opción Detalle (Página principal > Drawer)');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const DetailPage())
@@ -235,9 +177,6 @@ class _MyHomePageState extends State<MyHomePage>
                 });
                 databaseHelper.insert(Audit(id: 0, action: 'Se abrió el drawer (Pagina principal)'));
                 databaseHelper.insert(Audit(id: 0, action: 'Se seleccionó la opción Sobre (Página principal > Drawer)'));
-                // context.read<AppData>().actions.add('Se abrió el drawer (Página principal)');
-                // context.read<AppData>().actions.add('Se seleccionó la opción Sobre (Página principal > Drawer)');
-                // Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const AboutPage())
@@ -253,9 +192,6 @@ class _MyHomePageState extends State<MyHomePage>
                 });
                 databaseHelper.insert(Audit(id: 0, action: 'Se abrió el drawer (Pagina principal)'));
                 databaseHelper.insert(Audit(id: 0, action: 'Se seleccionó la opción Auditoría (Página principal > Drawer)'));
-                // context.read<AppData>().actions.add('Se abrió el drawer (Página principal)');
-                // context.read<AppData>().actions.add('Se seleccionó la opción Auditoría (Página principal > Drawer)');
-                // Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const AuditPage(title: 'Auditoría'))
@@ -271,8 +207,6 @@ class _MyHomePageState extends State<MyHomePage>
                 });
                 databaseHelper.insert(Audit(id: 0, action: 'Se abrió el drawer (Pagina principal)'));
                 databaseHelper.insert(Audit(id: 0, action: 'Se seleccionó la opción Preferencia (Página principal > Drawer)'));
-                // context.read<AppData>().actions.add('Se abrió el drawer (Pagina principal)');
-                // context.read<AppData>().actions.add('Se seleccionó la opción Preferencia (Página principal > Drawer)');
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const PreferencePage(title: 'Preferencia'))
@@ -314,8 +248,6 @@ class _MyHomePageState extends State<MyHomePage>
               ),
               Text
               (
-                // '$_counter',
-                // '${context.read<AppData>().counter}',
                 '${_counter.round()}',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
@@ -332,19 +264,16 @@ class _MyHomePageState extends State<MyHomePage>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>
                 [
-                  // footerButton(_decrementCounter, const Icon(Icons.remove)), //Footer button to decrement counter value
                   ElevatedButton(
                     onPressed: context.read<AppData>().decrementCounter,
                     child: Icon(Icons.remove)
                   ),
                   const SizedBox(width: 8),
-                  // footerButton(_resetCounter, const Icon(Icons.refresh)), //Footer button to reset counter value
                   ElevatedButton(
                     onPressed: context.read<AppData>().resetCounter,
                     child: Icon(Icons.refresh)
                   ),
                   const SizedBox(width: 8),
-                  // footerButton(_incrementCounter, const Icon(Icons.add)), //Footer button to increment counter value
                   ElevatedButton(
                     onPressed: context.read<AppData>().incrementCounter,
                     child: Icon(Icons.add)
@@ -373,7 +302,6 @@ class _MyHomePageState extends State<MyHomePage>
           );
         },
       ),
-      // floatingActionButton: floatingButton(_resetCounter, 'Reiniciar', const Icon(Icons.refresh)) //Floating button to reset counter value
     );
   }
 }

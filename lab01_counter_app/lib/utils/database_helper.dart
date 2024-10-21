@@ -18,8 +18,6 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDatabase() async {
-    final databasePath = await getDatabasesPath();
-    final path = '$databasePath/audits.db';
     return await openDatabase(
       join(await getDatabasesPath(), 'audits.db'),
       onCreate: (db, version) {
@@ -31,15 +29,6 @@ class DatabaseHelper {
     );
   }
 
-  Future<void> _createDatabase(Database db, int version) async {
-    return await db.execute('''
-        CREATE TABLE audits (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          action TEXT NOT NULL
-        )
-      ''');
-  }
-
   Future<void> insert(Audit audit) async {
     final db = await database;
     await db.insert(
@@ -48,12 +37,6 @@ class DatabaseHelper {
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
-
-  // Future<Audit> insert(Audit audit) async {
-  //   final db = await instance.database;
-  //   final id = await db.insert('audits', audit.toJson());
-  //   return audit.copy(id: id);
-  // }
 
   Future<List<Audit>> read() async {
     final db = await database;
@@ -66,30 +49,4 @@ class DatabaseHelper {
         Audit(id: id, action: action),
     ];
   }
-
-  // Future<Audit> recovery(int id) async {
-  //   final db = await instance.database;
-  //   final maps = await db.query(
-  //     'audits',
-  //     columns: [
-  //       'id',
-  //       'action'
-  //     ],
-  //     where: 'id = ?',
-  //     whereArgs: [id],
-  //   );
-
-  //   if (maps.isNotEmpty) {
-  //     return Audit.fromJson(maps.first);
-  //   } else {
-  //     throw Exception('ID $id not found');
-  //   }
-  // }
-
-  // Future<List<Audit>> readAll() async {
-  //   final db = await instance.database;
-  //   const orderBy = 'id DESC';
-  //   final result = await db.query('audits', orderBy: orderBy);
-  //   return result.map((json) => Audit.fromJson(json)).toList();
-  // }
 }

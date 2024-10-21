@@ -20,14 +20,11 @@ class _AuditPageState extends State<AuditPage> {
 
   DatabaseHelper databaseHelper = DatabaseHelper.instance;
   List<Audit> audits = [];
-  // int auditsLength = 0;
 
   @override
   Widget build(BuildContext context) {
-    // context.read<AppData>().actions.add('Ubicación actual: Página auditoría');
     
     databaseHelper.insert(Audit(id: 0, action: 'Ubicación actual: Página auditoría'));
-    // audits = databaseHelper.readAll();
     databaseHelper.read().then((value) {
       setState(() {
         audits = value;
@@ -41,32 +38,14 @@ class _AuditPageState extends State<AuditPage> {
         child: ListView(
           padding: EdgeInsets.all(8),
           children: List.generate(audits.length, (int index) {
-              // return Text(context.read<AppData>().actions[index]);
-              return Container(
-                height: 50,
-                color: Colors.amber[600],
-                child: Center(
-                  child: Text(audits[index].action)
-                ),
-              );
-            })
-          // children: List.generate(context.read<AppData>().actions.length, (int index) {
-          //     // return Text(context.read<AppData>().actions[index]);
-          //     return Container(
-          //       height: 50,
-          //       color: Colors.amber[600],
-          //       child: Center(
-          //         child: Text(context.read<AppData>().actions[index])
-          //       ),
-          //     );
-          //   })
-            
-            // Container(
-            //   height: 50,
-            //   color: Colors.amber[600],
-            //   child: const Center(child: Text('Hola')),
-            // ),
-            // const SizedBox(height: 5,),
+            return Container(
+              height: 50,
+              color: Colors.amber[600],
+              child: Center(
+                child: Text(audits[index].action)
+              ),
+            );
+          })
         ),
       ),
     );
