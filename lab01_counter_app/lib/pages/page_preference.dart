@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lab01_counter_app/models/audit.dart';
+import 'package:lab01_counter_app/utils/database_helper.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,6 +31,8 @@ class _PreferencePageState extends State<PreferencePage> {
 
   Future<void> _savePreferences() async {
     final prefs = await SharedPreferences.getInstance();
+    DatabaseHelper databaseHelper = DatabaseHelper.instance;
+    databaseHelper.insert(Audit(action: 'Se modificaron los valores del nombre de usuario y contador'));
     setState(() {
       prefs.setString('userName', _userName);
       prefs.setDouble('counter', _counter);

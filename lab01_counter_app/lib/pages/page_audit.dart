@@ -24,7 +24,7 @@ class _AuditPageState extends State<AuditPage> {
   @override
   Widget build(BuildContext context) {
     
-    databaseHelper.insert(Audit(id: 0, action: 'Ubicación actual: Página auditoría'));
+    // databaseHelper.insert(Audit(id: 0, action: 'Ubicación actual: Página auditoría'));
     databaseHelper.read().then((value) {
       setState(() {
         audits = value;
