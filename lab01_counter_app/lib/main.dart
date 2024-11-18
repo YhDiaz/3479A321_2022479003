@@ -4,9 +4,12 @@ import 'package:lab01_counter_app/models/app_data.dart';
 import 'package:logger/logger.dart';
 import 'package:lab01_counter_app/pages/page_home.dart';
 import 'package:provider/provider.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() async {
   await WidgetsFlutterBinding.ensureInitialized();
+  sqfliteFfiInit();
+  databaseFactory = databaseFactoryFfi;
 
   // Obtain a list of the available cameras on the device.
   // List<CameraDescription> cameras = List.empty(growable: true);
