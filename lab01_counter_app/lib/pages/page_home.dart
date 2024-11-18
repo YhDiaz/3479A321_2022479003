@@ -1,3 +1,5 @@
+
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lab01_counter_app/models/app_data.dart';
@@ -6,6 +8,7 @@ import 'package:lab01_counter_app/pages/page_about.dart';
 import 'package:lab01_counter_app/pages/page_audit.dart';
 import 'package:lab01_counter_app/pages/page_detail.dart';
 import 'package:lab01_counter_app/pages/page_preference.dart';
+import 'package:lab01_counter_app/pages/page_take_picture.dart';
 import 'package:lab01_counter_app/utils/database_helper.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -41,9 +44,11 @@ Widget floatingButton(
 
 class MyHomePage extends StatefulWidget
 {
-  const MyHomePage({super.key, required this.title});
+  // MyHomePage({super.key, required this.title, required this.camera});
+  MyHomePage({super.key, required this.title});
 
   final String title;
+  // CameraDescription camera;
 
   @override
   State<MyHomePage> createState() {
@@ -215,6 +220,23 @@ class _MyHomePageState extends State<MyHomePage>
                 });
               },
             ),
+            // ListTile( // Take picture page.
+            //   title: const Text('Take picture'),
+            //   selected: _selectedIndex == 0,
+            //   onTap: () {
+            //     setState(() {
+            //       _selectedIndex = 0;
+            //     });
+            //     // databaseHelper.insert(Audit(id: 0, action: 'Se abrió el drawer (Pagina principal)'));
+            //     // databaseHelper.insert(Audit(id: 0, action: 'Se seleccionó la opción Preferencia (Página principal > Drawer)'));
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => TakePictureScreen(camera: widget.camera,))
+            //     ).then((_) {
+            //       _loadPreferences();
+            //     });
+            //   },
+            // ),
           ],
         ),
       ),
@@ -332,5 +354,5 @@ class _ChildCounterWidgetState extends State<ChildCounterWidget> {
   @override
   Widget build(BuildContext context) {
     return Text('Child counter: $counter');
-    }
+  }
 }
