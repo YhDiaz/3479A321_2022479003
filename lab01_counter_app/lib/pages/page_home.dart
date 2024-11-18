@@ -1,5 +1,3 @@
-
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lab01_counter_app/models/app_data.dart';
@@ -7,8 +5,8 @@ import 'package:lab01_counter_app/models/audit.dart';
 import 'package:lab01_counter_app/pages/page_about.dart';
 import 'package:lab01_counter_app/pages/page_audit.dart';
 import 'package:lab01_counter_app/pages/page_detail.dart';
+import 'package:lab01_counter_app/pages/page_holidays.dart';
 import 'package:lab01_counter_app/pages/page_preference.dart';
-import 'package:lab01_counter_app/pages/page_take_picture.dart';
 import 'package:lab01_counter_app/utils/database_helper.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -218,6 +216,21 @@ class _MyHomePageState extends State<MyHomePage>
                 ).then((_) {
                   _loadPreferences();
                 });
+              },
+            ),
+            ListTile( // Holidays page.
+              title: const Text('Feriados'),
+              selected: _selectedIndex == 0,
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 0;
+                });
+                databaseHelper.insert(Audit(id: 0, action: 'Se abrió el drawer (Pagina principal)'));
+                databaseHelper.insert(Audit(id: 0, action: 'Se seleccionó la opción Feriados (Página principal > Drawer)'));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HolidaysPage(year: 2024))
+                );
               },
             ),
             // ListTile( // Take picture page.
