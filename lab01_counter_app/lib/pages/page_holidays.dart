@@ -26,18 +26,47 @@ class HolidaysPage extends StatefulWidget {
 
 class _HolidaysPageState extends State<HolidaysPage> {
   late Future<List<Holiday>> futureHoliday;
+  int year = 0;
 
   @override
   void initState() {
     super.initState();
     futureHoliday = fetchHolidays(widget.year);
+
+    setState(() {
+      year = widget.year;
+    });
+    // year = widget.year;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Feriados Chile - ${widget.year}'),
+          title: Text('Feriados Chile - ${year}'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  if (year == 2013) return;
+                  year--;
+                  futureHoliday = fetchHolidays(year);
+                });
+              },
+              icon: const Icon(Icons.remove),
+            ),
+            Text('${year}'),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  if (year == 2024) return;
+                  year++;
+                  futureHoliday = fetchHolidays(year);
+                });
+              },
+              icon: const Icon(Icons.add),
+            ),
+          ],
         ),
         body: Center(
           child: FutureBuilder<List<Holiday>>(
