@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lab01_counter_app/models/app_data.dart';
 import 'package:lab01_counter_app/models/audit.dart';
+// import 'package:lab01_counter_app/models/holiday.dart';
 import 'package:lab01_counter_app/pages/page_about.dart';
 import 'package:lab01_counter_app/pages/page_audit.dart';
 import 'package:lab01_counter_app/pages/page_detail.dart';
@@ -230,6 +231,7 @@ class _MyHomePageState extends State<MyHomePage>
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const HolidaysPage(year: 2024))
+                  // MaterialPageRoute(builder: (context) => HolidaysPage(year: 2024, holidays: widget.holidays,))
                 );
               },
             ),

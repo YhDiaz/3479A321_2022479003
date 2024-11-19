@@ -1,36 +1,48 @@
 // import 'package:camera/camera.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:lab01_counter_app/models/app_data.dart';
+import 'package:lab01_counter_app/models/holiday.dart';
 import 'package:logger/logger.dart';
 import 'package:lab01_counter_app/pages/page_home.dart';
 import 'package:provider/provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:http/http.dart' as http;
+
+// Future<List<Holiday>> fetchHolidays() async {
+//   final response = await http.get(Uri.parse('https://apis.digital.gob.cl/fl/feriados/2024'));
+
+//   if (response.statusCode == 200) {
+//     // If the server did return a 200 OK response,
+//     // then parse the JSON.
+//     // print(jsonDecode(response.body));
+//     final List<dynamic> jsonData = jsonDecode(response.body) as List<dynamic>;
+//     print(jsonData);
+//     return jsonData.map((json) => Holiday.fromJson(json as Map<String, dynamic>)).toList();
+//   } else {
+//     // If the server did not return a 200 OK response,
+//     // then throw an exception.
+//     throw Exception('Failed to load holidays');
+//   }
+// }
 
 void main() async {
   await WidgetsFlutterBinding.ensureInitialized();
   sqfliteFfiInit();
   databaseFactory = databaseFactoryFfi;
 
-  // Obtain a list of the available cameras on the device.
-  // List<CameraDescription> cameras = List.empty(growable: true);
-  // try {
-  //   cameras = await availableCameras();
-  // } catch (ex) {
-  //   print('Exception');
-  // }
-
-  // Get a specific camera from the list of available cameras.
-  // final firstCamera = cameras.first;
-
   runApp(const MyApp());
-  // runApp(MyApp(firstCamera: cameras.first));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
-  // CameraDescription firstCamera;
-  // MyApp({super.key, required this.firstCamera});
-  
+  @override
+  State<StatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
   @override
   Widget build(BuildContext context) {
     var logger = Logger();
